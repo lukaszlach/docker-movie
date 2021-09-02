@@ -2,3 +2,4 @@
 Dockerfile
 Makefile
 movie.avi
+#frames/*

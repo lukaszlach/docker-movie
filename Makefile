@@ -1,11 +1,12 @@
 .PHONY: build frames run cli push
+export DOCKER_BUILDKIT=1
 
 build:
 	docker build -t pixterm-movie --progress=plain .
 	docker images pixterm-movie
 
 frames: MOVIE ?= movie.avi
-frames: FPS ?= 1/20
+frames: FPS ?= 1/10
 frames:
 	rm -rf ./frames && mkdir ./frames
 	docker run --rm -it -v $$(pwd):/srv -w /srv jrottenberg/ffmpeg:3.4-scratch -i ${MOVIE} -filter:v fps=fps=${FPS} frames/%0d.jpg

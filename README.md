@@ -22,7 +22,10 @@ cd docker-movie/
 make frames MOVIE=movie.avi
 make frames MOVIE=movie.mp4
 
+# Render 1/10 frames-per-second (fps)
 make frames MOVIE=movie.mpg FPS=1/10
+# Render 2fps, that would result in quite big image size
+make frames MOVIE=movie.mpg FPS=2
 
 # Build Docker image
 make build
@@ -31,11 +34,21 @@ make build
 make run
 
 # Fast-forward
-make run SEEK=50
+make run SEEK=500
 # Control the playback speed
-make run SLEEP=0.5
+make run SLEEP=0.4
 # Drop a single frame from the movie
 make run SEEK=100 ONCE=1
+```
+
+```bash
+# Play
+make run
+^C
+SEEK=2773
+
+# Resume
+make run SEEK=2773
 ```
 
 ![](https://user-images.githubusercontent.com/5011490/131734818-81422d44-1d0b-4b88-b93c-6da3660f59da.png)

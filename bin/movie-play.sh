@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-trap "finish" EXIT INT TERM
+trap "finish" INT TERM
 set -e
 finish() {
+    tput cnorm
     echo
     echo "SEEK=$FRAME"
-    tput cnorm
     exit 0
 }
 FRAME=${SEEK:-0}
@@ -21,6 +21,7 @@ while true; do
     tput cup 0 0
     cat "$FRAME_RAW_FILE"
     if [[ "$ONCE" == "1" ]]; then
+        tput cnorm
         exit 0
     fi
     sleep "${SLEEP:-0.2}"
